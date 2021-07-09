@@ -13,6 +13,8 @@ public class Pet {
     @Column(columnDefinition = "TEXT")
     public String diagnosis;
 
+    private Pet() {}
+
     public Pet(String name, String diagnosis) {
         this.name = name;
         this.diagnosis = diagnosis;

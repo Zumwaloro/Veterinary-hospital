@@ -13,6 +13,10 @@ public class PetService {
     @Autowired
     PetRepository petRepository;
 
+    public Iterable<Pet> getAllPets(){
+        return petRepository.findAll();
+    }
+
     //Get pet by id
     public Optional<Pet> getPetById(long id){
         return petRepository.findById(id);
@@ -46,6 +50,4 @@ public class PetService {
         petRepository.save(petEntity);
         return "Update successful.";
     }
-
-
 }
