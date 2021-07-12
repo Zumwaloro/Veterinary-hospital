@@ -14,6 +14,8 @@ public class Staff {
     public String name;
     public String title;
 
+    private Staff() {}
+
     public Staff(String name, String title) {
         this.name = name;
         this.title = title;

@@ -18,6 +18,8 @@ public class Owner {
     public int treatmentCostsDue;
     public int getTreatmentCostsPaid;
 
+    private Owner() {}
+
     public Owner(String name, String address, long phone, int treatmentCostsDue, int getTreatmentCostsPaid) {
         this.name = name;
         this.address = address;
