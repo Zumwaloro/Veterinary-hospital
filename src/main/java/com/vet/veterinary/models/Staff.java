@@ -13,12 +13,14 @@ public class Staff {
     public long id;
     public String name;
     public String title;
+    public String patientIds;
 
     private Staff() {}
 
-    public Staff(String name, String title) {
+    public Staff(String name, String title, String patientIds) {
         this.name = name;
         this.title = title;
+        this.patientIds = patientIds;
     }
 
     public String getName() {
@@ -36,4 +38,8 @@ public class Staff {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getPatientIds() { return patientIds; }
+
+    public void setPatientIds(String patientIds) { this.patientIds = patientIds; }
 }

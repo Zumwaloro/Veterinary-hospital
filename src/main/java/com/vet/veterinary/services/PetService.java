@@ -47,6 +47,11 @@ public class PetService {
         } catch (Exception e) { return "Failed to update."; }
         petEntity.name = pet.name;
         petEntity.diagnosis = pet.diagnosis;
+        petEntity.ownerName = pet.ownerName;
+        petEntity.ownerAddress = pet.ownerAddress;
+        petEntity.ownerPhone = pet.ownerPhone;
+        petEntity.treatmentCostsDue = pet.treatmentCostsDue;
+        petEntity.treatmentCostsPaid = pet.treatmentCostsPaid;
         petRepository.save(petEntity);
         return "Update successful.";
     }
