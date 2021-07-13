@@ -46,5 +46,7 @@ public class ExpenseService {
         return calculator.calculateNewExpenses(petId, description, cost);
     }
 
+    public String getExpenseDetails(long petId) { return calculator.getServiceFeeDetails(petId); }
+
 
 }

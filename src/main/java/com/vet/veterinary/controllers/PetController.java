@@ -57,4 +57,9 @@ public class PetController {
         return expenseService.calculateNewExpenses(petId, desc, cost);
     }
 
+    @RequestMapping(value = "/expenses/details/{id}", method = RequestMethod.GET)
+    public String getExpenseDetails(@PathVariable(value = "id") long petId) {
+        return expenseService.getExpenseDetails(petId);
+    }
+
 }
