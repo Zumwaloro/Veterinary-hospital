@@ -1,6 +1,7 @@
 package com.vet.veterinary.controllers;
 
 import com.vet.veterinary.models.Pet;
+import com.vet.veterinary.services.ExpenseService;
 import com.vet.veterinary.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -14,16 +15,18 @@ import java.util.Optional;
 public class PetController {
 
     @Autowired
-    private PetService service;
+    private PetService petService;
+    @Autowired
+    private ExpenseService expenseService;
 
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<Pet> getAllPets() {
-        return service.getAllPets();
+        return petService.getAllPets();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Optional<Pet> getPetById(@PathVariable(value="id") long id) {
-        return service.getPetById(id);
+        return petService.getPetById(id);
     }
 
     @PostMapping(value = "/post",
@@ -31,12 +34,12 @@ public class PetController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public String postPetToDatabase(@RequestBody Pet pet) {
-        return service.postPetToDatabase(pet);
+        return petService.postPetToDatabase(pet);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String deletePetFromDatabase(@PathVariable(value="id") long id) {
-        return service.deletePetById(id);
+        return petService.deletePetById(id);
     }
 
     @PutMapping(value = "/update",
@@ -44,7 +47,14 @@ public class PetController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public String updatePetInDatabase(@RequestBody Pet pet) {
-        return service.updatePet(pet);
+        return petService.updatePet(pet);
+    }
+
+    @RequestMapping(value = "/expenses/{petId}/{desc}/{cost}", method = RequestMethod.GET)
+    public String addExpenseToPet(@PathVariable(value = "petId") long petId,
+                                  @PathVariable(value = "desc") String desc,
+                                  @PathVariable(value = "cost") int cost) {
+        return expenseService.calculateNewExpenses(petId, desc, cost);
     }
 
 }

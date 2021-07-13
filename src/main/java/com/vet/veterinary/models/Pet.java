@@ -1,6 +1,10 @@
 package com.vet.veterinary.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Pet {
@@ -14,19 +18,22 @@ public class Pet {
     public String ownerName;
     public String ownerAddress;
     public long ownerPhone;
-    public int treatmentCostsDue;
-    public int treatmentCostsPaid;
+    @JsonManagedReference
+    @OneToMany(
+            mappedBy = "pet",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    public List<Expense> expenses = new ArrayList<>();
 
     private Pet() {}
 
-    public Pet(String name, String diagnosis, String ownerName, String ownerAddress, long ownerPhone, int treatmentCostsDue, int treatmentCostsPaid) {
+    public Pet(String name, String diagnosis, String ownerName, String ownerAddress, long ownerPhone) {
         this.name = name;
         this.diagnosis = diagnosis;
         this.ownerName = ownerName;
         this.ownerAddress = ownerAddress;
         this.ownerPhone = ownerPhone;
-        this.treatmentCostsDue = treatmentCostsDue;
-        this.treatmentCostsPaid = treatmentCostsPaid;
     }
 
     public String getName() {
@@ -69,19 +76,15 @@ public class Pet {
         this.ownerPhone = ownerPhone;
     }
 
-    public int getTreatmentCostsDue() {
-        return treatmentCostsDue;
+    public void addExpense(Expense expense) { expenses.add(expense); }
+
+    public void removeExpense(Expense expense) { expenses.remove(expense); }
+
+    public List<Expense> getExpenses() {
+        return expenses;
     }
 
-    public void setTreatmentCostsDue(int treatmentCostsDue) {
-        this.treatmentCostsDue = treatmentCostsDue;
-    }
-
-    public int getTreatmentCostsPaid() {
-        return treatmentCostsPaid;
-    }
-
-    public void setTreatmentCostsPaid(int treatmentCostsPaid) {
-        this.treatmentCostsPaid = treatmentCostsPaid;
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
     }
 }

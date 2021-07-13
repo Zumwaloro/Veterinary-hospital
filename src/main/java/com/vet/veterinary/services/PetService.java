@@ -50,8 +50,6 @@ public class PetService {
         petEntity.ownerName = pet.ownerName;
         petEntity.ownerAddress = pet.ownerAddress;
         petEntity.ownerPhone = pet.ownerPhone;
-        petEntity.treatmentCostsDue = pet.treatmentCostsDue;
-        petEntity.treatmentCostsPaid = pet.treatmentCostsPaid;
         petRepository.save(petEntity);
         return "Update successful.";
     }
