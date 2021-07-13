@@ -3,7 +3,6 @@ package com.vet.veterinary.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.util.Map;
 
 @Entity
 public class Expense {

@@ -2,7 +2,6 @@ package com.vet.veterinary.services;
 
 import com.vet.veterinary.expenses.ExpenseCalculator;
 import com.vet.veterinary.models.Expense;
-import com.vet.veterinary.models.Pet;
 import com.vet.veterinary.repositories.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

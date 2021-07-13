@@ -1,13 +1,11 @@
 package com.vet.veterinary.services;
 
-import com.vet.veterinary.models.Pet;
 import com.vet.veterinary.models.Staff;
 import com.vet.veterinary.repositories.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 @Service
 public class StaffService {
