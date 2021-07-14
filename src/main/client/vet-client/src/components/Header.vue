@@ -1,25 +1,24 @@
 <template>
-
-  <div>
-    Hello!
-  </div>
-
+    <div class="container-fluid" id="header-container">    
+        <div class="row">
+            <div class="col-sm-12" id="header-logo-container">
+                <img class="img-fluid" src="../assets/logo.png" alt="header-index">
+            </div>
+        </div>    
+    </div>
 </template>
-
 
 
 <script>
 export default {
   name: 'Header',
-  props: {
-    msg: String
-  }
 }
 </script>
 
-
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+  #header-container {
+    background-color: #7541D3;
+  }
 
 </style>
