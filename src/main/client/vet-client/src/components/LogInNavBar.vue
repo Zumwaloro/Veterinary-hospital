@@ -7,15 +7,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="form-group">
                     <label for="inputEmail" id="label">Email address</label>
-                    <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" v-model="email">
             </div>
             <div class="form-group" id="password">
                     <label for="inputPassword" id="label">Password</label>
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Password"  v-model="password">
             </div>            
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active" id="menu-item-wrapper">
-                    <a class="nav-link" id="menu-item">Log in <span class="sr-only"></span></a>
+                    <a class="nav-link" id="menu-item" @click="login">Log in <span class="sr-only"></span></a>
                 </li>
             </ul>
         </div>
@@ -25,7 +25,25 @@
 
 <script>
 export default {
-    name: "NavBar",
+    name: "LogInNavBar",
+    data() {
+        return {
+            email: '',
+            password: ''
+        }
+    },
+    methods: {
+        //just some hardcoded basic login to fiddle with routing
+        login() {
+            if (this.email === "example@animaclinic.com" && this.password === "admin") 
+            {
+                alert("Wooo!")
+            } else 
+            {
+                alert("Incorrect email and/or password.")
+            }
+        }
+    }
 }
 </script>
 

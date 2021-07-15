@@ -1,6 +1,6 @@
 <template>
   <Header />
-  <NavBar />
+  <LogInNavBar />
   <div class="row" id="background">
     <div class="row justify-content-center" id="home-img-container">
       <div class="col-md-8" id="img-holder">
@@ -12,13 +12,13 @@
 
 <script>
 import Header from './components/Header.vue'
-import NavBar from './components/NavBar.vue'
+import LogInNavBar from './components/LogInNavBar.vue'
 
 export default {
   name: 'App',
   components: {
     Header,
-    NavBar
+    LogInNavBar
   }
 }
 </script>
