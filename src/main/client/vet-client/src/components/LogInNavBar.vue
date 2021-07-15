@@ -15,7 +15,7 @@
             </div>            
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active" id="menu-item-wrapper">
-                    <a class="nav-link" id="menu-item" @click="login">Log in <span class="sr-only"></span></a>
+                    <router-link class="nav-link" id="menu-item" @click="login" to="/user">Log in <span class="sr-only"></span></router-link>
                 </li>
             </ul>
         </div>
