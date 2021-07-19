@@ -30,7 +30,8 @@ public class ExpenseCalculator {
                 .map(e -> e.serviceDetails + ": " + e.price + " NOK")
                 .collect(Collectors.toList());
         list.add(getTotal(expenses));
-        return list.toString();
+        String stringList = list.toString();
+        return stringList.substring(1, stringList.length()-1);
     }
 
     public String getTotal(List<Expense> list) {

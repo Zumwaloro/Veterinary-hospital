@@ -16,6 +16,11 @@
                     </div>
                     <div class="col-md-4" id="btn-wrapper">
                         <button class="nav-link" id="expense-btn" @click="getExpenseDetails(client.id)">Show expenses <span class="sr-only"></span></button>
+                        <ExpenseViewModal v-if="viewExpenses" @close-expenses="closeExpenses">
+                            <div v-for="expense in expenses.split(',')" :key="expense">
+                                <p>{{expense}}</p>
+                            </div>
+                        </ExpenseViewModal>
                     </div>
                     <div class="col-md-4" id="btn-wrapper">
                         <button class="nav-link" id="expense-btn" @click="getExpenseDetails(client.id)">Add expenses <span class="sr-only"></span></button>
@@ -29,6 +34,7 @@
 <script>
 import Header from '../components/Header.vue'
 import UserPageNavBar from '../components/UserPageNavBar.vue'
+import ExpenseViewModal from '../components/ExpenseViewModal.vue'
 import axios from 'axios'
 
 export default {
@@ -36,9 +42,9 @@ export default {
   data() {
       return {
           clientsActive: false,
-          clients: [],
-          expensesActive: false,
-          expenses: []
+          expenses: false,
+          viewExpenses: false,
+          addExpenses: false
       }
   },
   methods: {
@@ -48,17 +54,20 @@ export default {
                 .then(function (response) {
                     that.clients = response.data
                     that.clientsActive = true
-                    that.expensesActive = false
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
       },
       getExpenseDetails(id) {
+            let that = this
             axios.get('http://localhost:8080/pet/expenses/details/'+id)
                 .then(function (response) {
                     console.log(response.data)
-                    return response.data
+                    that.expenses = response.data
+                })
+                .then(function () {
+                    that.viewExpenses = true
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -72,11 +81,16 @@ export default {
                 .catch(function (error) {
                     console.log(error);
                 });
+      },
+      closeExpenses() {
+          this.viewExpenses = false
+          console.log(this.expenses)
       }
   },
   components: {
     Header,
-    UserPageNavBar
+    UserPageNavBar,
+    ExpenseViewModal
   }
 }
 </script>
