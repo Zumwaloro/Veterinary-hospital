@@ -37,5 +37,5 @@ export default {
     color: black;
   }
 
-</style>>
+</style>
 

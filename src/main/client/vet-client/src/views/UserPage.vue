@@ -63,11 +63,9 @@ export default {
             let that = this
             axios.get('http://localhost:8080/pet/expenses/details/'+id)
                 .then(function (response) {
-                    console.log(response.data)
                     that.expenses = response.data
-                })
-                .then(function () {
                     that.viewExpenses = true
+
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -84,7 +82,6 @@ export default {
       },
       closeExpenses() {
           this.viewExpenses = false
-          console.log(this.expenses)
       }
   },
   components: {
