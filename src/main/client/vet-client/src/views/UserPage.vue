@@ -1,5 +1,4 @@
 <template>
-  <Header />
   <UserPageNavBar @retrieve-clients="getClients"/>
       <div class="row" id="clients">
         <div v-if="clientsActive">
@@ -22,12 +21,22 @@
                             </div>
                         </ExpenseViewModal>
                     </div>
-                    <div class="col-md-4" id="btn-wrapper">
+                    <div class="col-md-4" id="btn-wrapper" v-on:submit-expenses="addExpenseDetails(client.id, diagnosis, price)">
                         <button class="nav-link" id="expense-btn" @click="addExpenses=true">Add expenses <span class="sr-only"></span></button>
-                        <AddExpensesModal v-if="addExpenses" @close-add-expenses="addExpenseDetails(client.id, diag, price)">
-                            <div >
-                                ADD EXPENSES
-                            </div>
+                        <AddExpensesModal v-if="addExpenses" 
+                            @close-add-expenses="closeAddExpenses"
+                            @submit-expenses="submitExpense"
+                        >
+                            <form class="add-form">
+                                <div class="form-control">
+                                    <label>Diagnosis</label>
+                                    <input type="text" name="diagnosis" placeholder="Add diagnosis" v-model="diagnosis"/>
+                                </div>
+                                <div class="form-control">
+                                    <label>Price</label>
+                                    <input type="text" name="price" placeholder="Add price of treatment" v-model="price"/>
+                                </div>                                
+                            </form>
                         </AddExpensesModal>
                     </div>
                 </div>
@@ -37,7 +46,6 @@
 </template>
 
 <script>
-import Header from '../components/Header.vue'
 import UserPageNavBar from '../components/UserPageNavBar.vue'
 import ExpenseViewModal from '../components/ExpenseViewModal.vue'
 import AddExpensesModal from '../components/AddExpensesModal.vue'
@@ -51,8 +59,8 @@ export default {
           expenses: false,
           viewExpenses: false,
           addExpenses: false,
-          diag: 'test',
-          price: 200
+          diagnosis: '',
+          price: ''
       }
   },
   methods: {
@@ -80,8 +88,9 @@ export default {
                 });
       },
       addExpenseDetails(id, diag, price) {
+          console.log(""+id+ this.diagnosis + this.price)
             let that = this
-            axios.get('http://localhost:8080/pet/expenses/'+id+'/'+diag+'/'+price)
+            axios.post('http://localhost:8080/pet/expenses/'+id+'/'+diag+'/'+price)
                 .then(function () {
                     that.addExpenses = false
                 })
@@ -94,10 +103,13 @@ export default {
       },
       closeAddExpenses() {
           this.addExpenses = false
+      },
+      submitExpense() {
+          console.log("submit")
+          this.$emit('submit-expenses')
       }
   },
   components: {
-    Header,
     UserPageNavBar,
     ExpenseViewModal,
     AddExpensesModal
@@ -152,5 +164,21 @@ export default {
     }
     #details {
         margin-top: 1rem;
+    }
+    .add-form {
+        margin-bottom: 40px;
+    }
+    .form-control {
+        margin: 20px 0;
+    }
+    .form-control label {
+        display: block;
+    }
+    .form-control-input {
+        width: 100%;
+        height: 40px;
+        margin: 5px;
+        padding: 3px 7px;
+        font-size: 17px;
     }
 </style>

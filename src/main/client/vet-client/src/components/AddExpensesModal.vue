@@ -5,6 +5,9 @@
       <button class="popup-close" @click="$emit('close-add-expenses')">
         Close
       </button>
+      <button class="popup-sublit" @click="$emit('submit-expenses')">
+        Submit
+      </button>      
     </div>
   </div>
   

@@ -50,7 +50,7 @@ public class PetController {
         return petService.updatePet(pet);
     }
 
-    @RequestMapping(value = "/expenses/{petId}/{desc}/{cost}", method = RequestMethod.GET)
+    @RequestMapping(value = "/expenses/{petId}/{desc}/{cost}", method = RequestMethod.POST)
     public String addExpenseToPet(@PathVariable(value = "petId") long petId,
                                   @PathVariable(value = "desc") String desc,
                                   @PathVariable(value = "cost") int cost) {
