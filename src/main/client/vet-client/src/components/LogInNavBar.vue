@@ -37,10 +37,11 @@ export default {
         login() {
             if (this.email === "example@animaclinic.com" && this.password === "admin") 
             {
-                alert("Wooo!")
+                console.log("Logged in.")
             } else 
             {
                 alert("Incorrect email and/or password.")
+                this.$router.push('/')
             }
         }
     }
