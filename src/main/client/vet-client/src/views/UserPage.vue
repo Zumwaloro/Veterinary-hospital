@@ -23,7 +23,12 @@
                         </ExpenseViewModal>
                     </div>
                     <div class="col-md-4" id="btn-wrapper">
-                        <button class="nav-link" id="expense-btn" @click="getExpenseDetails(client.id)">Add expenses <span class="sr-only"></span></button>
+                        <button class="nav-link" id="expense-btn" @click="addExpenses=true">Add expenses <span class="sr-only"></span></button>
+                        <AddExpensesModal v-if="addExpenses" @close-add-expenses="addExpenseDetails(client.id, diag, price)">
+                            <div >
+                                ADD EXPENSES
+                            </div>
+                        </AddExpensesModal>
                     </div>
                 </div>
             </div>
@@ -35,6 +40,7 @@
 import Header from '../components/Header.vue'
 import UserPageNavBar from '../components/UserPageNavBar.vue'
 import ExpenseViewModal from '../components/ExpenseViewModal.vue'
+import AddExpensesModal from '../components/AddExpensesModal.vue'
 import axios from 'axios'
 
 export default {
@@ -44,7 +50,9 @@ export default {
           clientsActive: false,
           expenses: false,
           viewExpenses: false,
-          addExpenses: false
+          addExpenses: false,
+          diag: 'test',
+          price: 200
       }
   },
   methods: {
@@ -72,9 +80,10 @@ export default {
                 });
       },
       addExpenseDetails(id, diag, price) {
+            let that = this
             axios.get('http://localhost:8080/pet/expenses/'+id+'/'+diag+'/'+price)
-                .then(function (response) {
-                    return response.data
+                .then(function () {
+                    that.addExpenses = false
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -82,12 +91,16 @@ export default {
       },
       closeExpenses() {
           this.viewExpenses = false
+      },
+      closeAddExpenses() {
+          this.addExpenses = false
       }
   },
   components: {
     Header,
     UserPageNavBar,
-    ExpenseViewModal
+    ExpenseViewModal,
+    AddExpensesModal
   }
 }
 </script>
