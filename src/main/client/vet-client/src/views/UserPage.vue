@@ -21,11 +21,11 @@
                             </div>
                         </ExpenseViewModal>
                     </div>
-                    <div class="col-md-4" id="btn-wrapper" v-on:submit-expenses="addExpenseDetails(client.id, diagnosis, price)">
-                        <button class="nav-link" id="expense-btn" @click="addExpenses=true">Add expenses <span class="sr-only"></span></button>
+                    <div class="col-md-4" id="btn-wrapper">
+                        <button class="nav-link" id="expense-btn" @click="openAddExpenses(client.id)">Add expenses <span class="sr-only"></span></button>
                         <AddExpensesModal v-if="addExpenses" 
                             @close-add-expenses="closeAddExpenses"
-                            @submit-expenses="submitExpense"
+                            @submit-expenses="addExpenseDetails(id, diagnosis, price)"
                         >
                             <form class="add-form">
                                 <div class="form-control">
@@ -60,7 +60,8 @@ export default {
           viewExpenses: false,
           addExpenses: false,
           diagnosis: '',
-          price: ''
+          price: '',
+          id: ''
       }
   },
   methods: {
@@ -101,12 +102,12 @@ export default {
       closeExpenses() {
           this.viewExpenses = false
       },
+      openAddExpenses(id) {
+          this.id = id
+          this.addExpenses=true
+      },
       closeAddExpenses() {
           this.addExpenses = false
-      },
-      submitExpense() {
-          console.log("submit")
-          this.$emit('submit-expenses')
       }
   },
   components: {
