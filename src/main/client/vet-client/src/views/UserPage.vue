@@ -107,6 +107,8 @@ export default {
           this.addExpenses=true
       },
       closeAddExpenses() {
+          this.diagnosis = ''
+          this.price = ''
           this.addExpenses = false
       }
   },
